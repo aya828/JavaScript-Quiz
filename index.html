@@ -11,27 +11,28 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="container justify-center flex-column" id="start">
+  <div class="container" id="start">
     <h1>Javascript Quiz!</h1>
     <p>
       Press "Start Quiz" to begin. You have 75 seconds to complete the quiz. The quiz will automatically finish once all five questions have been answered or when the timer runs out. Click on the answer and it will automatically move onto the next question. Each question is worth 20 points. For every wrong answer, the timer will take off five seconds. Good luck!
     </p>
     <button id="startBtn">Start Quiz</button>
   </div>
+  <div class="container">
     <div class="hidden" id="question">
       <div id="score"></div>
       <div id="timer"></div>
       <div id="title"></div>
-      <div class="choice-container">
+      <div class="container">
         <button class="choice-text" id="choice1">choice 1</button>
       </div>
-      <div class="choice-container">
+      <div class="container">
         <button class="choice-text" id="choice2">choice 2</button>
       </div>
-      <div class="choice-container">
+      <div class="container">
         <button class="choice-text" id="choice3">choice 3</button>
       </div>
-      <div class="choice-container">
+      <div class="container">
         <button class="choice-text" id="choice4">choice 4</button>
       </div>
     </div>
@@ -39,9 +40,10 @@
         <input type="name" id="name" placeholder="Type initials here"/>
         <button type="submit" id="submit">Submit Score</button>
         <div id="highScore">
-          <p id="highScoreList">High Scores:</p>
+          <p id="highScoreList"><u>High Scores:</u></p>
         </div>
       </div>
+  </div>
   <script src="questions.js"></script>
   <script src="script.js"></script>
 </body>

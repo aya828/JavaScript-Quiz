@@ -39,7 +39,6 @@ function startGame() {
   score = 0;
   scoreDiv.innerText = "Score: " + score;
   availableQuestions = [...questions];
-  console.log(availableQuestions);
   getNewQuestion();
   setTimer();
 }
@@ -97,7 +96,9 @@ function highScores() {
   var submitBtn = document.getElementById("submit");
   submitBtn.addEventListener("click", function(e) {
     e.preventDefault();
-    var name = highScoreName.value; 
+    var name = highScoreName.value;
+    var keepHighScore = JSON.parse(localStorage.getItem("score")) || [];
+
     localStorage.setItem("score", score);
     localStorage.setItem("name", name);
   })
@@ -106,15 +107,15 @@ function highScores() {
   var newScore = localStorage.getItem("score");
   highScore.innerHTML = "High Scores: " + initial + " " + newScore;
 
+  var newPlayerScores = [
+    name = name,
+    score = score
+  ]
 
-  var newScores = [
-    { name: "", score: 10 },
-    { name: "", score: 10 },
-    { name: "", score: 10 }
-  ];
-
-function findPlayerScore(idx) {
-  localStorage.setItem("idx", JSON.stringify(newScores));
+  function findPlayerScore(idx) {
+    localStorage.setItem("idx", JSON.stringify(newScores));
+    console.log(findPlayerScore);
 };
 
 findPlayerScore();
+}
