@@ -1,4 +1,3 @@
-
 var question = document.getElementById("question");
 var scoreDiv = document.getElementById("score");
 var highScore = document.getElementById("highScore");
@@ -76,11 +75,12 @@ function getNewQuestion() {
 
 function onAnswer(selectedChoice) {
   if(currentQuestion.answer == selectedChoice) {
-    score++;
+    score = score + 20;
     scoreDiv.innerText = "Score: " + score;
   }
   else {
     time = time - 5;
+  
   }
   questionCounter++;
   getNewQuestion();
@@ -107,19 +107,14 @@ function highScores() {
   highScore.innerHTML = "High Scores: " + initial + " " + newScore;
 
 
-  var scores = [
-    { name: "gary", score: 10 },
+  var newScores = [
+    { name: "", score: 10 },
     { name: "", score: 10 },
     { name: "", score: 10 }
-  ]
+  ];
 
-  var findPlayerScore = function(){
-    // read all scores from localstorage
-    // loop through scores; if name = currentplayer name, then make the score the currenr score
-  }
+function findPlayerScore(idx) {
+  localStorage.setItem("idx", JSON.stringify(newScores));
+};
 
-  // new player enters name
-  var player = { name: "name", score: 0 };
-
-
-}
+findPlayerScore();
