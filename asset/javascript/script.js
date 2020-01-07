@@ -89,7 +89,7 @@ function onAnswer(selectedChoice) {
     scoreDiv.innerText = "Score: " + score;
   }
   else {
-    time = time - 5;
+    time = time - 15;
   }
   questionCounter++;
   getNewQuestion();
