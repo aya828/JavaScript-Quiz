@@ -8,7 +8,10 @@ var choice2 = document.getElementById("choice2");
 var choice3 = document.getElementById("choice3");
 var choice4 = document.getElementById("choice4");
 var highScoreName = document.getElementById("name");
+var highScoreList = document.getElementById("highScoreList");
+var startOverBtn = document.getElementById("startOverBtn");
 
+// Choice buttons for each question
 choice1.onclick = () => onAnswer(1);
 choice2.onclick = () => onAnswer(2);
 choice3.onclick = () => onAnswer(3);
@@ -27,13 +30,18 @@ var timerSetIntervalId;
 var startBtn = document.getElementById("startBtn");
 var startPage = document.getElementById("start");
 var results = document.getElementById("results");
+var submitBtn = document.getElementById("submit");
 
+submitBtn.onclick = submitScore;
+
+// Function for start button to disappear once clicked and quiz div to appear
 startBtn.addEventListener("click", function() {
   startPage.className = "hidden";
   question.className = "";
   startGame();
 })
 
+// Function for displaying questions and score after start button
 function startGame() {
   questionCounter = 0;
   score = 0;
@@ -43,6 +51,7 @@ function startGame() {
   setTimer();
 }
 
+// Timer display function
 function setTimer() {
   updateTimer();
   timerSetIntervalId = setInterval(function () {
@@ -58,6 +67,7 @@ function updateTimer() {
   timer.innerText = "Timer: " + time;
 }
 
+// Function for getting new question and correct choices for question
 function getNewQuestion() {
   if(questionCounter < questions.length) {
     currentQuestion = availableQuestions[questionCounter];
@@ -72,6 +82,7 @@ function getNewQuestion() {
   }
 }
 
+// Function for adding score for right answer and subtracting time for wrong answer
 function onAnswer(selectedChoice) {
   if(currentQuestion.answer == selectedChoice) {
     score = score + 20;
@@ -85,37 +96,62 @@ function onAnswer(selectedChoice) {
   getNewQuestion();
 }
 
+// Function for hiding quiz div and showing results div
 function endGame() {
   question.className = "hidden";
   results.className = "";
-  clearInterval(timerSetIntervalId);
-  highScores();
-}
-
-function highScores() {
-  var submitBtn = document.getElementById("submit");
-  submitBtn.addEventListener("click", function(e) {
+  startOverBtn.addEventListener("click", function(e) {
     e.preventDefault();
-    var name = highScoreName.value;
-    var keepHighScore = JSON.parse(localStorage.getItem("score")) || [];
-
-    localStorage.setItem("score", score);
-    localStorage.setItem("name", name);
+    history.go(-3);
   })
-
-  var initial = localStorage.getItem("name");
-  var newScore = localStorage.getItem("score");
-  highScore.innerHTML = "High Scores: " + initial + " " + newScore;
-
-  var newPlayerScores = [
-    name = name,
-    score = score
-  ]
-
-  function findPlayerScore(idx) {
-    localStorage.setItem("idx", JSON.stringify(newScores));
-    console.log(findPlayerScore);
-};
-
-findPlayerScore();
+  clearInterval(timerSetIntervalId);
+  showScore();
+  // startOver.addEventListener("click", function(e) {
+  //   e.preventDefault();
+  //   window.history.go(-6);
+  // })
 }
+
+function showScore() {
+  var highScores = localStorage.getItem("highscores")
+  if(highScores != null) {
+    var oldScores = JSON.parse(highScores);
+    oldScores.sort(function(a, b){
+      
+      var aValue = Object.values(a)[0];
+      var bValue = Object.values(b)[0];
+      return bValue - aValue;
+    });
+    highScoreList.innerText = "High Scores: " + oldScores.map(function(oldScore){
+      var oldScoreKey = Object.keys(oldScore)[0];
+      return oldScoreKey + ":" + oldScore[oldScoreKey];
+    }).join("\n");
+  }
+}
+
+// Submitting and saving high scores in local storage and display on page
+function submitScore() {
+  var oldScores = localStorage.getItem("highscores");
+  if(oldScores == null) {
+    localStorage.setItem("highscores", JSON.stringify([{[highScoreName.value] : score}]));
+  }
+  else {
+    var highscores = JSON.parse(oldScores);
+    highscores.push({[highScoreName.value] : score});
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+  }
+  showScore();
+}
+
+
+
+//   var initial = localStorage.getItem("name");
+//   var newScore = localStorage.getItem("score");
+//   highScore.innerHTML = "High Scores: " + initial + " " + newScore;
+
+//   var newPlayerScores = [];
+
+//   function findPlayerScore(idx) {
+//     localStorage.setItem("idx", JSON.stringify(newPlayerScores));
+//     console.log(findPlayerScore);
+// });
