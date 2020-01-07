@@ -90,7 +90,6 @@ function onAnswer(selectedChoice) {
   }
   else {
     time = time - 5;
-  
   }
   questionCounter++;
   getNewQuestion();
@@ -102,16 +101,13 @@ function endGame() {
   results.className = "";
   startOverBtn.addEventListener("click", function(e) {
     e.preventDefault();
-    history.go(-3);
+    history.go();
   })
   clearInterval(timerSetIntervalId);
   showScore();
-  // startOver.addEventListener("click", function(e) {
-  //   e.preventDefault();
-  //   window.history.go(-6);
-  // })
 }
 
+// Showing all results for high score on page
 function showScore() {
   var highScores = localStorage.getItem("highscores")
   if(highScores != null) {
@@ -142,16 +138,3 @@ function submitScore() {
   }
   showScore();
 }
-
-
-
-//   var initial = localStorage.getItem("name");
-//   var newScore = localStorage.getItem("score");
-//   highScore.innerHTML = "High Scores: " + initial + " " + newScore;
-
-//   var newPlayerScores = [];
-
-//   function findPlayerScore(idx) {
-//     localStorage.setItem("idx", JSON.stringify(newPlayerScores));
-//     console.log(findPlayerScore);
-// });

@@ -30,14 +30,18 @@ div#question {
 #score {
   display: inline-flex;
   margin-right: 10px;
+  font-size: x-large;
+  font-weight: bold;
 }
 
 #timer {
   display: inline-flex;
   text-align: right;
   margin-left: 10px;
-
+  font-size: x-large;
+  font-weight: bold;
 }
+
 .choice-text {
   color: white;
   background: purple;
@@ -72,7 +76,7 @@ button#submit {
   margin: 10px;
 }
 
-#startOver {
+#startOverBtn {
   color: white;
   background: purple;
   border-radius: 10px;
